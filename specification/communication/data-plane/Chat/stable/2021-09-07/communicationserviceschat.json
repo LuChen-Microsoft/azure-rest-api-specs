@@ -1709,7 +1709,8 @@
         "retentionPolicyType": {
           "description": "Retention Policy Type",
           "enum": [
-            "basedOnThreadCreationDate"
+            "basedOnThreadCreationDate",
+            "basedOnThreadLastActivityDate"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1733,7 +1734,7 @@
             "daysAfterCreation":{
               "type": "integer",
               "format": "int32",
-              "description": "Indicates how many days after the thread creation the thread will be deleted. Only 90 is accepted for now."
+              "description": "Indicates how many days after the thread creation the thread will be deleted."
             }
           },
           "required": [
@@ -1743,6 +1744,27 @@
         }
       ]
     }
+  },
+  "BasedOnThreadLastActivityDateRetentionPolicy": {
+    "allOf": [
+      {
+        "$ref": "#/definitions/RetentionPolicy"
+      },
+      {
+        "type": "object",
+        "properties": {
+          "daysAfterLastActivity":{
+            "type": "integer",
+            "format": "int32",
+            "description": "Indicates how many days after the thread last activity the thread will be deleted."
+          }
+        },
+        "required": [
+          "daysAfterLastActivity"
+        ],
+        "x-ms-discriminator-value": "basedOnThreadLastActivityDate"
+      }
+    ]
   },
   "parameters": {
     "ApiVersionParameter": {

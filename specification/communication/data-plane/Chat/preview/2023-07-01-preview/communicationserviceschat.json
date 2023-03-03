@@ -1597,7 +1597,14 @@
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
         },
-        "retentionPolicy": {
+        "
+        
+        
+        
+        
+        
+        
+        ": {
           "$ref": "#/definitions/RetentionPolicy"
         }
       }
@@ -1709,7 +1716,8 @@
         "policyType": {
           "description": "Retention Policy Type",
           "enum": [
-            "basedOnThreadCreationDate"
+            "basedOnThreadCreationDate",
+            "basedOnThreadLastActivityDate"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1718,6 +1726,10 @@
             "values": [
               {
                 "value": "basedOnThreadCreationDate",
+                "description": "Thread retention policy based on thread creation date."
+              },
+              {
+                "value": "basedOnThreadLastActivityDate",
                 "description": "Thread retention policy based on thread creation date."
               }
             ]
@@ -1746,6 +1758,26 @@
       },
       "required": [
         "daysAfterCreation"
+      ]
+    },
+    "BasedOnThreadLastActivityDateRetentionPolicy": {
+      "description": "Thread retention policy based on thread last activity date.",
+      "type": "object",
+      "x-ms-discriminator-value": "basedOnThreadLastActivityDate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RetentionPolicy"
+        }
+      ],
+      "properties": {
+        "daysAfterLastActivity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Indicates how many days after the thread creation the thread will be deleted. Only 90 is accepted for now."
+        }
+      },
+      "required": [
+        "daysAfterLastActivity"
       ]
     }
   },

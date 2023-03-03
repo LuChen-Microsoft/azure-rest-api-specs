@@ -1715,7 +1715,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "policyType",
-            "modelAsString": true,
+            "modelAsString": false,
             "values": [
               {
                 "value": "basedOnThreadCreationDate",
